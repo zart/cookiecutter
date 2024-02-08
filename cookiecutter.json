@@ -1,0 +1,9 @@
+{
+  "templates": {
+    "empty": {
+      "path": "empty",
+      "title": "empty directory",
+      "description": "contains nothing but readme"
+    }
+  }
+}
