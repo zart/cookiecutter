@@ -1,4 +1,4 @@
 {{ cookiecutter.project }}
-{{ cookiecutter.project | length * '='  }}
+{{ cookiecutter.project | length * '=' }}
 
 TBD
