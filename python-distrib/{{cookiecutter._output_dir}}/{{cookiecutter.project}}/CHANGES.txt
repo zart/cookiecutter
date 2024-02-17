@@ -1,0 +1,4 @@
+{{ cookiecutter.version }} {% now 'utc', '%Y-%m-%d' %}
+{{ (cookiecutter.version|length + 11) * '=' }}
+
+- Initial release

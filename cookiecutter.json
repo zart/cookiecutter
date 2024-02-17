@@ -1,5 +1,10 @@
 {
   "templates": {
+    "python-distrib": {
+      "path": "python-distrib",
+      "title": "python distribution",
+      "description": "python source distribution"
+    },
     "python-package": {
       "path": "python-package",
       "title": "python package",
