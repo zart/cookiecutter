@@ -1,4 +1,7 @@
 {
   "project": "project",
-  "package": "package"
+  "package": "package",
+  "nstype": ["pep420", "setuptools+pkgutil", "setuptools", "pkgutil"],
+  "__src": "src",
+  "__package": "{{ cookiecutter.package.replace('.', '/') }}"
 }

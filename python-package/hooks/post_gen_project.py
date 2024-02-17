@@ -1,0 +1,37 @@
+import os
+
+project = {{ cookiecutter.project | pprint }}
+package = {{ cookiecutter.package | pprint }}
+src = {{ cookiecutter.__src | pprint }}
+
+{% set nstype = cookiecutter.nstype %}
+{% if nstype == "pep420" %}
+NAMESPACE_INIT = None
+{% else %}
+NAMESPACE_INIT = """\
+'namespace package %s'
+# see `PEP420 <https://peps.python.org/pep-0420/>`_
+# https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#legacy-namespace-packages
+# https://docs.python.org/3/library/pkgutil.html#pkgutil.extend_path
+{% if nstype == "setuptools" -%}
+__import__('pkg_resources').declare_namespace(__name__)
+{% endif -%}
+{% if nstype == "setuptools+pkgutil" -%}
+try:
+    __import__('pkg_resources').declare_namespace(__name__)
+except ImportError:
+    __path__ = __import__('pkgutil').extend_path(__path__, __name__)
+{% endif -%}
+{% if nstype == "pkgutil" -%}
+__path__ = __import__('pkgutil').extend_path(__path__, __name__)
+{% endif -%}
+"""
+{% endif %}
+
+parts = package.split('.')
+for partno, part in enumerate(parts[:-1], 1):
+    pkg = '.'.join(parts[:partno])
+    path = os.path.join(project, src, *parts[:partno], '__init__.py')
+    if NAMESPACE_INIT is not None:
+        with open(path, 'w') as fp:
+            fp.write(NAMESPACE_INIT % pkg)
