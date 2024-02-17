@@ -15,5 +15,9 @@
   "nslevel": -1,
   "__src": "src",
   "__package": "{{ cookiecutter.package.replace('.', '/') }}",
-  "__ns_packages": "{% set _s=joiner(' ') %}{% set _p=cookiecutter.package.split('.')[:-1] %}{% for _part in _p %}{{ _s() }}{% if cookiecutter.nslevel|int == -1 or loop.index <= cookiecutter.nslevel|int %}{{ _p[:loop.index] | join('.') }}{% endif %}{% endfor %}"
+  "__ns_packages": "{% set _s=joiner(' ') %}{% set _p=cookiecutter.package.split('.')[:-1] %}{% for _part in _p %}{{ _s() }}{% if cookiecutter.nslevel|int == -1 or loop.index <= cookiecutter.nslevel|int %}{{ _p[:loop.index] | join('.') }}{% endif %}{% endfor %}",
+  "_jinja2_env_vars": {
+    "lstrip_blocks": true,
+    "trim_blocks": true
+  }
 }
