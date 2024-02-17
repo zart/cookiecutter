@@ -3,6 +3,7 @@ import os
 project = {{ cookiecutter.project | pprint }}
 package = {{ cookiecutter.package | pprint }}
 src = {{ cookiecutter.__src | pprint }}
+nslevel = {{ cookiecutter.nslevel | int }}
 
 {% set nstype = cookiecutter.nstype %}
 {% if nstype == "pep420" %}
@@ -28,10 +29,17 @@ __path__ = __import__('pkgutil').extend_path(__path__, __name__)
 """
 {% endif %}
 
+# generate intermediate inits for a.b.c.package
 parts = package.split('.')
 for partno, part in enumerate(parts[:-1], 1):
     pkg = '.'.join(parts[:partno])
     path = os.path.join(project, src, *parts[:partno], '__init__.py')
-    if NAMESPACE_INIT is not None:
+    if nslevel == -1 or partno <= nslevel:
+        content = None if NAMESPACE_INIT is None else NAMESPACE_INIT % pkg
+    else:
+        content = ''
+    if content is not None:
         with open(path, 'w') as fp:
-            fp.write(NAMESPACE_INIT % pkg)
+            fp.write(content)
+
+print({{ cookiecutter.__ns_packages | pprint }})
