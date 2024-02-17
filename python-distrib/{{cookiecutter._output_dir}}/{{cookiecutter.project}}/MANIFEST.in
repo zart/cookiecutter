@@ -1,0 +1,8 @@
+{% if cookiecutter.__src %}
+graft {{ cookiecutter.__src }}
+{% else %}
+graft {{ cookiecutter.package.split('.')[0] }}
+{% endif %}
+graft tests
+
+global-exclude __pycache__ *.py[cod] *.so
