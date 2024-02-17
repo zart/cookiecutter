@@ -41,5 +41,3 @@ for partno, part in enumerate(parts[:-1], 1):
     if content is not None:
         with open(path, 'w') as fp:
             fp.write(content)
-
-print({{ cookiecutter.__ns_packages | pprint }})
