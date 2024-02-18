@@ -1,6 +1,6 @@
 import os
 
-project = {{ cookiecutter.project | pprint }}
+project = {{ cookiecutter.__project | pprint }}
 package = {{ cookiecutter.package | pprint }}
 src = {{ cookiecutter.__src | pprint }}
 nslevel = {{ cookiecutter.nslevel | int }}
